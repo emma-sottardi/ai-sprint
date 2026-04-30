@@ -36,16 +36,16 @@ function ArrowButton({
       whileHover={disabled ? {} : { scale: 1.08 }}
       whileTap={disabled ? {} : { scale: 0.95 }}
       transition={{ duration: 0.15 }}
-      className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+      className={`group flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
         disabled
           ? "border-[#d8d8d8] opacity-30 cursor-not-allowed"
-          : "border-black cursor-pointer hover:bg-black hover:text-white"
+          : "border-black cursor-pointer"
       }`}
     >
       <img
         src={newsArrow}
         alt={direction === "prev" ? "Previous" : "Next"}
-        className={`h-4 w-4 transition-all ${direction === "prev" ? "rotate-180" : "-rotate-90"}`}
+        className={`h-4 w-4 transition-all ${direction === "prev" ? "rotate-180" : "-rotate-90"} ${!disabled ? "group-hover:invert" : ""}`}
       />
     </motion.button>
   );
