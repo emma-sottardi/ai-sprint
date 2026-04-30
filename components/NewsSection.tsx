@@ -39,13 +39,13 @@ function ArrowButton({
       className={`group flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
         disabled
           ? "border-[#d8d8d8] opacity-30 cursor-not-allowed"
-          : "border-black cursor-pointer"
+          : "border-black cursor-pointer hover:bg-black"
       }`}
     >
       <img
         src={newsArrow}
         alt={direction === "prev" ? "Previous" : "Next"}
-        className={`h-4 w-4 transition-all ${direction === "prev" ? "rotate-180" : "-rotate-90"} ${!disabled ? "group-hover:invert" : ""}`}
+        className={`h-4 w-4 transition-all ${direction === "prev" ? "rotate-180" : "-rotate-90"} ${!disabled ? "group-hover:[filter:brightness(0)_invert(1)]" : ""}`}
       />
     </motion.button>
   );
