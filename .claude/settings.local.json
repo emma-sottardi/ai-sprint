@@ -4,7 +4,13 @@
       "mcp__figma__get_design_context",
       "mcp__figma__get_metadata",
       "mcp__figma__get_screenshot",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "mcp__sanity__whoami",
+      "mcp__sanity__list_projects",
+      "mcp__sanity__list_organizations",
+      "mcp__sanity__create_project",
+      "Bash(npx tsc *)",
+      "mcp__sanity__add_cors_origin"
     ]
   },
   "enabledMcpjsonServers": [

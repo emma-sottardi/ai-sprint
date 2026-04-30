@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-const ease = [0.33, 1, 0.68, 1];
+const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
 const serviceImages = [
   "https://www.figma.com/api/mcp/asset/f429f7f5-3474-41bd-903a-de6beeff5bd7",

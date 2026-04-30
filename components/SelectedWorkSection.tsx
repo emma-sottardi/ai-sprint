@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-const ease = [0.33, 1, 0.68, 1];
+const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
 const workArrow =
   "https://www.figma.com/api/mcp/asset/432fe2d3-e798-4459-b9d8-bcfab287c29d";
