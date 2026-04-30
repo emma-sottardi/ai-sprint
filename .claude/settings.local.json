@@ -10,7 +10,12 @@
       "mcp__sanity__list_organizations",
       "mcp__sanity__create_project",
       "Bash(npx tsc *)",
-      "mcp__sanity__add_cors_origin"
+      "mcp__sanity__add_cors_origin",
+      "mcp__sanity__create_documents_from_json",
+      "mcp__sanity__publish_documents",
+      "Bash(curl -s -o /tmp/test_image.jpg \"https://www.figma.com/api/mcp/asset/e5f7002f-be5b-4597-b736-262f3defff59\")",
+      "Read(//tmp/**)",
+      "mcp__sanity__patch_document_from_json"
     ]
   },
   "enabledMcpjsonServers": [

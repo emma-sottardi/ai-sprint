@@ -3,56 +3,47 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const testimonials = [
-  {
-    name: "Marko Stojkovic",
-    quote: "A brilliant creative partner who transformed our vision into a unique, high-impact brand identity. Their ability to craft everything from custom mascots to polished logos is truly impressive.",
-    logo: "https://www.figma.com/api/mcp/asset/8d639d1e-d912-4423-9bdb-6890242eea15",
-    position: "lg:left-[7%] lg:top-[14%] lg:-rotate-[6.85deg]",
-    y: [220, -80],
-  },
-  {
-    name: "Lukas Weber",
-    quote: "Professional, precise, and incredibly fast at handling complex product visualizations and templates.",
-    logo: "https://www.figma.com/api/mcp/asset/bb9e63c1-8c71-4c81-a3f3-bc4fcec4e4ee",
-    position: "lg:left-[47%] lg:top-[25%] lg:rotate-[2.9deg]",
-    y: [0, 260],
-  },
-  {
-    name: "Sarah Jenkins",
-    quote: "A strategic partner who balances stunning aesthetics with high-performance UX for complex platforms. They don't just make things look good; they solve business problems through visual clarity.",
-    logo: "https://www.figma.com/api/mcp/asset/95a3b005-fffe-4cca-bbc5-ab1fb8ea7257",
-    position: "lg:left-[22%] lg:top-[56%] lg:rotate-[2.23deg]",
-    y: [180, -120],
-  },
-  {
-    name: "Sofia Martinez",
-    quote: "An incredibly versatile designer who delivers consistent quality across a wide range of styles and formats.",
-    logo: "https://www.figma.com/api/mcp/asset/8b445955-2cdb-4afd-95ce-3d1a7619af95",
-    position: "lg:right-[6%] lg:top-[55%] lg:-rotate-[4.15deg]",
-    y: [40, 300],
-  },
+const layout = [
+  { position: "lg:left-[7%] lg:top-[14%] lg:-rotate-[6.85deg]",  y: [220, -80] as [number, number] },
+  { position: "lg:left-[47%] lg:top-[25%] lg:rotate-[2.9deg]",   y: [0, 260]   as [number, number] },
+  { position: "lg:left-[22%] lg:top-[56%] lg:rotate-[2.23deg]",  y: [180, -120] as [number, number] },
+  { position: "lg:right-[6%] lg:top-[55%] lg:-rotate-[4.15deg]", y: [180, -80] as [number, number] },
 ];
+
+const fallbackTestimonials = [
+  { name: "Marko Stojkovic", quote: "A brilliant creative partner who transformed our vision into a unique, high-impact brand identity. Their ability to craft everything from custom mascots to polished logos is truly impressive.", logoUrl: "https://www.figma.com/api/mcp/asset/8d639d1e-d912-4423-9bdb-6890242eea15" },
+  { name: "Lukas Weber",     quote: "Professional, precise, and incredibly fast at handling complex product visualizations and templates.", logoUrl: "https://www.figma.com/api/mcp/asset/bb9e63c1-8c71-4c81-a3f3-bc4fcec4e4ee" },
+  { name: "Sarah Jenkins",   quote: "A strategic partner who balances stunning aesthetics with high-performance UX for complex platforms. They don't just make things look good; they solve business problems through visual clarity.", logoUrl: "https://www.figma.com/api/mcp/asset/95a3b005-fffe-4cca-bbc5-ab1fb8ea7257" },
+  { name: "Sofia Martinez",  quote: "An incredibly versatile designer who delivers consistent quality across a wide range of styles and formats.", logoUrl: "https://www.figma.com/api/mcp/asset/8b445955-2cdb-4afd-95ce-3d1a7619af95" },
+];
+
+type TestimonialItem = { name: string; quote: string; logoUrl: string | null };
 
 function TestimonialCard({
   testimonial,
+  position,
+  y: yRange,
   scrollYProgress,
 }: {
-  testimonial: typeof testimonials[0];
+  testimonial: TestimonialItem;
+  position: string;
+  y: [number, number];
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
-  const y = useTransform(scrollYProgress, [0, 1], testimonial.y);
+  const y = useTransform(scrollYProgress, [0, 1], yRange);
 
   return (
     <motion.article
       style={{ y }}
-      className={`rounded border border-[#ddd] bg-[#f1f1f1] p-6 lg:absolute lg:w-[353px] ${testimonial.position}`}
+      className={`rounded border border-[#ddd] bg-[#f1f1f1] p-6 lg:absolute lg:w-[353px] ${position}`}
     >
-      <img
-        src={testimonial.logo}
-        alt=""
-        className="mb-4 h-8 w-auto max-w-[145px] object-contain object-left"
-      />
+      {testimonial.logoUrl && (
+        <img
+          src={testimonial.logoUrl}
+          alt=""
+          className="mb-4 h-8 w-auto max-w-[145px] object-contain object-left"
+        />
+      )}
       <p className="m-0 text-lg leading-[1.3] tracking-[-0.04em] text-[#1f1f1f]">
         {testimonial.quote}
       </p>
@@ -63,7 +54,10 @@ function TestimonialCard({
   );
 }
 
-export function TestimonialsSection() {
+type TestimonialsSectionProps = { testimonials?: TestimonialItem[] | null };
+
+export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+  const items = testimonials?.length ? testimonials : fallbackTestimonials;
   const ref = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -81,10 +75,12 @@ export function TestimonialsSection() {
       </h2>
 
       <div className="relative z-10 mt-10 grid gap-6 sm:grid-cols-2 lg:absolute lg:inset-0 lg:mt-0 lg:block">
-        {testimonials.map((t) => (
+        {items.map((t, i) => (
           <TestimonialCard
             key={t.name}
             testimonial={t}
+            position={layout[i % layout.length].position}
+            y={layout[i % layout.length].y}
             scrollYProgress={scrollYProgress}
           />
         ))}

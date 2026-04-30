@@ -4,24 +4,19 @@ import { motion } from "framer-motion";
 
 const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
-const serviceImages = [
-  "https://www.figma.com/api/mcp/asset/f429f7f5-3474-41bd-903a-de6beeff5bd7",
-  "https://www.figma.com/api/mcp/asset/19bbc217-4922-421e-bd2e-86cba461f7d6",
-  "https://www.figma.com/api/mcp/asset/b135c419-deb0-4bef-a8a8-f2984cd4ee8c",
-  "https://www.figma.com/api/mcp/asset/3922b531-5dda-4581-b6fe-99b8dc221507",
+const fallbackServices = [
+  { number: "1", title: "Brand Discovery",   description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/f429f7f5-3474-41bd-903a-de6beeff5bd7" },
+  { number: "2", title: "Web Design & Dev",  description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/19bbc217-4922-421e-bd2e-86cba461f7d6" },
+  { number: "3", title: "Marketing",         description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/b135c419-deb0-4bef-a8a8-f2984cd4ee8c" },
+  { number: "4", title: "Photography",       description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/3922b531-5dda-4581-b6fe-99b8dc221507" },
 ];
 
-const services = [
-  { number: "1", title: "Brand Discovery",   text: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", image: serviceImages[0] },
-  { number: "2", title: "Web Design & Dev",  text: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", image: serviceImages[1] },
-  { number: "3", title: "Marketing",         text: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", image: serviceImages[2] },
-  { number: "4", title: "Photography",       text: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", image: serviceImages[3] },
-];
+type ServiceItem = { number: string; title: string; description: string; imageUrl: string | null };
 
 const rowClass = "grid gap-5 border-t border-white py-4 last:border-b sm:min-h-[184px] sm:grid-cols-[minmax(260px,1fr)_minmax(260px,0.55fr)_151px] sm:gap-6 sm:py-[9px] lg:grid-cols-[minmax(360px,1fr)_minmax(360px,0.52fr)_151px]";
 
 /* ─── Hover: underline sweeps across title, text brightens ─── */
-function ServiceRow({ s }: { s: typeof services[0] }) {
+function ServiceRow({ s }: { s: ServiceItem }) {
   return (
     <motion.article
       whileHover="hover"
@@ -29,7 +24,7 @@ function ServiceRow({ s }: { s: typeof services[0] }) {
       className={`${rowClass} cursor-pointer`}
     >
       <div>
-        <span className="mb-6 block font-mono text-sm leading-none text-white sm:mb-7">[ {s.number} ]</span>
+        <span className="mb-6 block font-mono text-sm leading-none text-white sm:mb-7">[ {s.number ?? ""} ]</span>
         <div className="relative inline-block">
           <h3 className="m-0 font-[family-name:var(--font-display)] text-[clamp(26px,2.6vw,42px)] font-bold uppercase italic leading-none tracking-[-0.08em] text-white">
             {s.title}
@@ -46,10 +41,10 @@ function ServiceRow({ s }: { s: typeof services[0] }) {
         transition={{ duration: 0.3 }}
         className="m-0 max-w-[450px] text-sm leading-[1.2] tracking-[-0.04em] text-white sm:pt-[30px]"
       >
-        {s.text}
+        {s.description}
       </motion.p>
       <motion.img
-        src={s.image}
+        src={s.imageUrl ?? ""}
         alt=""
         variants={{ rest: { opacity: 0.5 }, hover: { opacity: 1 } }}
         transition={{ duration: 0.3 }}
@@ -60,7 +55,10 @@ function ServiceRow({ s }: { s: typeof services[0] }) {
 }
 
 
-export function ServicesSection() {
+type ServicesSectionProps = { services?: ServiceItem[] | null };
+
+export function ServicesSection({ services }: ServicesSectionProps) {
+  const items = services?.length ? services : fallbackServices;
   return (
     <section id="services" className="w-full bg-black px-5 py-16 text-white sm:px-8 sm:py-[78px]">
       <div className="flex w-full flex-col">
@@ -80,7 +78,7 @@ export function ServicesSection() {
         </div>
 
         <div className="flex flex-col">
-          {services.map((service) => (
+          {items.map((service) => (
             <ServiceRow key={service.number} s={service} />
           ))}
         </div>

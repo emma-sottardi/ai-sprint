@@ -7,14 +7,18 @@ const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 const workArrow =
   "https://www.figma.com/api/mcp/asset/432fe2d3-e798-4459-b9d8-bcfab287c29d";
 
-const selectedWorks = [
-  { title: "Surfers Paradise",   image: "https://www.figma.com/api/mcp/asset/e5f7002f-be5b-4597-b736-262f3defff59", imageHeight: "lg:h-[744px]" },
-  { title: "Cyberpunk Caffe",    image: "https://www.figma.com/api/mcp/asset/ad70ac11-fb1a-44bf-9710-4005169d2d83", imageHeight: "lg:h-[699px]" },
-  { title: "Agency 976",         image: "https://www.figma.com/api/mcp/asset/c9be02a6-9f64-4f1b-b3ed-27fb11940bc4", imageHeight: "lg:h-[699px]" },
-  { title: "Minimal Playground", image: "https://www.figma.com/api/mcp/asset/76374325-56a0-4a80-b271-8afe97829d5f", imageHeight: "lg:h-[744px]" },
+const fallbackWorks = [
+  { title: "Surfers Paradise",   imageUrl: "https://www.figma.com/api/mcp/asset/e5f7002f-be5b-4597-b736-262f3defff59", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[744px]" },
+  { title: "Cyberpunk Caffe",    imageUrl: "https://www.figma.com/api/mcp/asset/ad70ac11-fb1a-44bf-9710-4005169d2d83", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[699px]" },
+  { title: "Agency 976",         imageUrl: "https://www.figma.com/api/mcp/asset/c9be02a6-9f64-4f1b-b3ed-27fb11940bc4", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[699px]" },
+  { title: "Minimal Playground", imageUrl: "https://www.figma.com/api/mcp/asset/76374325-56a0-4a80-b271-8afe97829d5f", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[744px]" },
 ];
 
-function WorkCard({ project }: { project: typeof selectedWorks[0] }) {
+const imageHeights = ["lg:h-[744px]", "lg:h-[699px]", "lg:h-[699px]", "lg:h-[744px]"];
+
+type ProjectItem = { title: string; imageUrl: string | null; tags: string[]; imageHeight?: string };
+
+function WorkCard({ project }: { project: ProjectItem }) {
   return (
     <motion.article
       whileHover="hover"
@@ -24,19 +28,18 @@ function WorkCard({ project }: { project: typeof selectedWorks[0] }) {
       {/* Image — scales up on hover, clipped by overflow-hidden */}
       <div className={`relative h-[390px] w-full overflow-hidden ${project.imageHeight}`}>
         <motion.img
-          src={project.image}
+          src={project.imageUrl ?? ""}
           alt=""
           variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
           transition={{ duration: 0.55, ease }}
           className="h-full w-full object-cover"
         />
         <div className="absolute bottom-4 left-4 flex flex-wrap gap-3">
-          <span className="rounded-full bg-white/30 px-2 py-1 text-sm font-medium leading-none tracking-[-0.04em] text-[#111] backdrop-blur-[10px]">
-            Social Media
-          </span>
-          <span className="rounded-full bg-white/30 px-2 py-1 text-sm font-medium leading-none tracking-[-0.04em] text-[#111] backdrop-blur-[10px]">
-            Photography
-          </span>
+          {(project.tags ?? []).map((tag) => (
+            <span key={tag} className="rounded-full bg-white/30 px-2 py-1 text-sm font-medium leading-none tracking-[-0.04em] text-[#111] backdrop-blur-[10px]">
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -62,7 +65,13 @@ function WorkCard({ project }: { project: typeof selectedWorks[0] }) {
   );
 }
 
-export function SelectedWorkSection() {
+type SelectedWorkSectionProps = { projects?: ProjectItem[] | null };
+
+export function SelectedWorkSection({ projects }: SelectedWorkSectionProps) {
+  const works: ProjectItem[] = (projects?.length ? projects : fallbackWorks).map((p, i) => ({
+    ...p,
+    imageHeight: p.imageHeight ?? imageHeights[i % imageHeights.length],
+  }));
   return (
     <section id="projects" className="w-full bg-white px-5 py-16 sm:px-8 lg:py-20">
       <div className="flex w-full flex-col gap-12 lg:gap-[61px]">
@@ -85,7 +94,7 @@ export function SelectedWorkSection() {
 
           {/* Left column */}
           <div className="flex flex-col gap-12 lg:gap-[123px]">
-            {selectedWorks.slice(0, 2).map((p) => (
+            {works.slice(0, 2).map((p) => (
               <WorkCard key={p.title} project={p} />
             ))}
 
@@ -112,7 +121,7 @@ export function SelectedWorkSection() {
 
           {/* Right column — offset down */}
           <div className="flex flex-col gap-12 lg:gap-[117px] lg:pt-60">
-            {selectedWorks.slice(2).map((p) => (
+            {works.slice(2).map((p) => (
               <WorkCard key={p.title} project={p} />
             ))}
           </div>
