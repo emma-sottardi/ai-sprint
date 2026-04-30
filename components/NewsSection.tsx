@@ -36,16 +36,25 @@ function ArrowButton({
       whileHover={disabled ? {} : { scale: 1.08 }}
       whileTap={disabled ? {} : { scale: 0.95 }}
       transition={{ duration: 0.15 }}
-      className={`group flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+      className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
         disabled
-          ? "border-[#d8d8d8] opacity-30 cursor-not-allowed"
-          : "border-black cursor-pointer hover:bg-black"
+          ? "border-[#d8d8d8] text-[#d8d8d8] opacity-30 cursor-not-allowed"
+          : "border-black text-black cursor-pointer hover:bg-black hover:text-white"
       }`}
     >
-      <img
-        src={newsArrow}
-        alt={direction === "prev" ? "Previous" : "Next"}
-        className={`h-4 w-4 transition-all ${direction === "prev" ? "rotate-180" : "-rotate-90"} ${!disabled ? "group-hover:[filter:brightness(0)_invert(1)]" : ""}`}
+      <span
+        className={`block h-4 w-4 shrink-0 transition-all ${direction === "prev" ? "rotate-180" : "-rotate-90"}`}
+        style={{
+          backgroundColor: "currentColor",
+          WebkitMaskImage: `url(${newsArrow})`,
+          maskImage: `url(${newsArrow})`,
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+          maskPosition: "center",
+        }}
       />
     </motion.button>
   );
