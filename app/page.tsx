@@ -58,29 +58,31 @@ export default async function Home() {
 
   return (
     <main className="bg-white">
-      <HeroSection />
-      <BioStripSection />
-      <AboutSection about={cmsAbout} />
+      {/* Sections sit above the sticky footer — their white background slides over it as you scroll */}
+      <div className="relative z-10 bg-white">
+        <HeroSection />
+        <BioStripSection />
+        <AboutSection about={cmsAbout} />
 
-      {/* -- Full-bleed Image -- */}
-      <section className="w-full bg-white" aria-label="Studio photography">
-        <div className="relative h-[420px] w-full overflow-hidden sm:h-[560px] lg:h-[760px]">
-          <img
-            src="https://www.figma.com/api/mcp/asset/92f87126-be84-4756-a7cc-1906686dd733"
-            alt="Photographer holding a camera"
-            className="h-full w-full object-cover object-center"
-          />
-        </div>
-      </section>
+        {/* -- Full-bleed Image -- */}
+        <section className="w-full bg-white" aria-label="Studio photography">
+          <div className="relative h-[420px] w-full overflow-hidden sm:h-[560px] lg:h-[760px]">
+            <img
+              src="https://www.figma.com/api/mcp/asset/92f87126-be84-4756-a7cc-1906686dd733"
+              alt="Photographer holding a camera"
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+        </section>
 
-      <ServicesSection services={cmsServices} />
-      <SelectedWorkSection projects={cmsProjects} />
-      <TestimonialsSection testimonials={cmsTestimonials} />
+        <ServicesSection services={cmsServices} />
+        <SelectedWorkSection projects={cmsProjects} />
+        <TestimonialsSection testimonials={cmsTestimonials} />
+        <NewsSection newsItems={cmsNewsItems} />
+      </div>
 
-      <NewsSection newsItems={cmsNewsItems} />
-
-      {/* -- Footer -- */}
-      <footer id="contact" className="w-full overflow-hidden bg-black px-5 pt-12 text-white sm:px-8">
+      {/* Footer: sticky at the viewport bottom, revealed as sections above scroll away */}
+      <footer id="contact" className="sticky bottom-0 z-0 overflow-hidden bg-black px-5 pt-12 text-white sm:px-8">
         <div className="flex flex-col gap-16 lg:gap-[120px]">
           <div className="flex flex-col gap-12">
             <div className="grid gap-8 md:grid-cols-3 md:items-start md:justify-between">
