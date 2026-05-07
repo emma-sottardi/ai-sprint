@@ -1,12 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const heroImage =
   "https://www.figma.com/api/mcp/asset/e58c2f18-af9f-4194-8b8d-2b9c932f00cb";
 
-const navLinks = ["About", "Services", "Projects", "News", "Contact"];
+const navLinks = [
+  { label: "About",    href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
+  { label: "News",     href: "/news" },
+  { label: "Contact",  href: "/#contact" },
+];
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -58,20 +65,23 @@ export function HeroSection() {
           </span>
 
           <div className="flex items-center gap-14">
-            {navLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+            {navLinks.map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
                 className="font-[family-name:var(--font-display)] text-base font-semibold tracking-[-0.04em] text-black transition-opacity hover:opacity-60"
               >
-                {link}
-              </a>
+                {label}
+              </Link>
             ))}
           </div>
 
-          <button className="cursor-pointer rounded-full bg-black px-4 py-[11px] text-sm font-medium tracking-[-0.04em] text-white transition-opacity hover:opacity-80">
+          <Link
+            href="/#contact"
+            className="cursor-pointer rounded-full bg-black px-4 py-[11px] text-sm font-medium tracking-[-0.04em] text-white transition-opacity hover:opacity-80"
+          >
             Let&apos;s talk
-          </button>
+          </Link>
         </nav>
 
         {/* Headline + description */}
@@ -112,9 +122,12 @@ export function HeroSection() {
                 {" "}design and art group specializing in branding, web design
                 and engineering.
               </p>
-              <button className="self-start cursor-pointer rounded-full bg-black px-4 py-[11px] text-sm font-medium tracking-[-0.04em] text-white transition-opacity hover:opacity-80">
+              <Link
+                href="/#contact"
+                className="self-start cursor-pointer rounded-full bg-black px-4 py-[11px] text-sm font-medium tracking-[-0.04em] text-white transition-opacity hover:opacity-80"
+              >
                 Let&apos;s talk
-              </button>
+              </Link>
             </div>
           </div>
 
