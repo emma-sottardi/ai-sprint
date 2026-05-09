@@ -3,8 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const fallbackPhoto =
-  "https://www.figma.com/api/mcp/asset/0f876f44-0b66-4735-b435-8d3dbe27c6e3";
+const fallbackPhoto = "/images/portrait.jpg";
 
 const fallbackBio =
   "Placeholder paragraph one. This is where you introduce yourself — your background, your passion for your craft, and what drives you creatively. Two to three sentences work best here. Placeholder paragraph two. Here you can describe your technical approach, how you collaborate with clients, or what sets your work apart from others in your field.";

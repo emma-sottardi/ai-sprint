@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 
 const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
-const newsArrow =
-  "https://www.figma.com/api/mcp/asset/c766910c-336e-47c6-91fb-1c42d8411739";
 
 const CARD_W = 353;
 const GAP = 31;
@@ -67,9 +65,9 @@ export function NewsSection({ newsItems }: { newsItems?: NewsItem[] | null }) {
   const items: NewsItem[] = newsItems?.length
     ? newsItems
     : [
-        { imageUrl: "https://www.figma.com/api/mcp/asset/88601f18-404e-4325-807b-8750301e858f", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", linkLabel: "Read more", linkUrl: "#news" },
-        { imageUrl: "https://www.figma.com/api/mcp/asset/fb945a0b-4deb-47b5-a743-bb75a105416f", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", linkLabel: "Read more", linkUrl: "#news" },
-        { imageUrl: "https://www.figma.com/api/mcp/asset/7ae86dc7-89ff-4156-a30e-6f4b7b126d93", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", linkLabel: "Read more", linkUrl: "#news" },
+        { imageUrl: "/images/news-1.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", linkLabel: "Read more", linkUrl: "#news" },
+        { imageUrl: "/images/news-2.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", linkLabel: "Read more", linkUrl: "#news" },
+        { imageUrl: "/images/news-3.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", linkLabel: "Read more", linkUrl: "#news" },
       ];
 
   const maxIndex = Math.max(0, items.length - VISIBLE_DESKTOP);
@@ -130,12 +128,9 @@ export function NewsSection({ newsItems }: { newsItems?: NewsItem[] | null }) {
                     className="inline-flex items-center gap-[10px] border-b border-black py-1 text-sm font-medium leading-none tracking-[-0.04em] text-black"
                   >
                     {item.linkLabel}
-                    <img
-                      src={newsArrow}
-                      alt=""
-                      className="h-[18px] w-[18px] -rotate-90"
-                      draggable={false}
-                    />
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="-rotate-90" aria-hidden="true">
+                      <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </a>
                 </article>
               ))}

@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
 const fallbackServices = [
-  { number: "1", title: "Brand Discovery",   description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/f429f7f5-3474-41bd-903a-de6beeff5bd7" },
-  { number: "2", title: "Web Design & Dev",  description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/19bbc217-4922-421e-bd2e-86cba461f7d6" },
-  { number: "3", title: "Marketing",         description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/b135c419-deb0-4bef-a8a8-f2984cd4ee8c" },
-  { number: "4", title: "Photography",       description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "https://www.figma.com/api/mcp/asset/3922b531-5dda-4581-b6fe-99b8dc221507" },
+  { number: "1", title: "Brand Discovery",   description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "/images/service-brand.jpg" },
+  { number: "2", title: "Web Design & Dev",  description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "/images/service-web.jpg" },
+  { number: "3", title: "Marketing",         description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "/images/service-marketing.jpg" },
+  { number: "4", title: "Photography",       description: "Placeholder description of this service. Explain the value you provide and the outcomes clients can expect. Keep it to two or three sentences.", imageUrl: "/images/service-photography.jpg" },
 ];
 
 type ServiceItem = { number: string; title: string; description: string; imageUrl: string | null };

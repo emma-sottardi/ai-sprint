@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 
-const portraitImage =
-  "https://www.figma.com/api/mcp/asset/0f876f44-0b66-4735-b435-8d3dbe27c6e3";
+const portraitImage = "/images/portrait.jpg";
 
 const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 

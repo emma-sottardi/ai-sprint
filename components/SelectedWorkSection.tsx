@@ -4,14 +4,11 @@ import { motion } from "framer-motion";
 
 const ease: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
-const workArrow =
-  "https://www.figma.com/api/mcp/asset/432fe2d3-e798-4459-b9d8-bcfab287c29d";
-
 const fallbackWorks = [
-  { title: "Surfers Paradise",   imageUrl: "https://www.figma.com/api/mcp/asset/e5f7002f-be5b-4597-b736-262f3defff59", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[744px]" },
-  { title: "Cyberpunk Caffe",    imageUrl: "https://www.figma.com/api/mcp/asset/ad70ac11-fb1a-44bf-9710-4005169d2d83", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[699px]" },
-  { title: "Agency 976",         imageUrl: "https://www.figma.com/api/mcp/asset/c9be02a6-9f64-4f1b-b3ed-27fb11940bc4", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[699px]" },
-  { title: "Minimal Playground", imageUrl: "https://www.figma.com/api/mcp/asset/76374325-56a0-4a80-b271-8afe97829d5f", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[744px]" },
+  { title: "Surfers Paradise",   imageUrl: "/images/project-surfers-paradise.jpg", tags: ["Social Media", "Photography"], imageHeight: "lg:h-[744px]" },
+  { title: "Cyberpunk Caffe",    imageUrl: "/images/project-cyberpunk-caffe.jpg",   tags: ["Social Media", "Photography"], imageHeight: "lg:h-[699px]" },
+  { title: "Agency 976",         imageUrl: "/images/project-agency-976.jpg",        tags: ["Social Media", "Photography"], imageHeight: "lg:h-[699px]" },
+  { title: "Minimal Playground", imageUrl: "/images/project-minimal-playground.jpg",tags: ["Social Media", "Photography"], imageHeight: "lg:h-[744px]" },
 ];
 
 const imageHeights = ["lg:h-[744px]", "lg:h-[699px]", "lg:h-[699px]", "lg:h-[744px]"];
@@ -52,14 +49,18 @@ function WorkCard({ project }: { project: ProjectItem }) {
           {project.title}
         </motion.h3>
 
-        {/* Arrow: -90 (pointing up-right) → 90 (pointing down) */}
-        <motion.img
-          src={workArrow}
-          alt=""
+        {/* Arrow: -90 (pointing up-right) → 0 (pointing down-right) */}
+        <motion.svg
+          width="32"
+          height="32"
+          viewBox="0 0 16 16"
+          fill="none"
           variants={{ rest: { rotate: -90 }, hover: { rotate: 0 } }}
           transition={{ duration: 0.4, ease }}
-          className="mt-1 h-8 w-8 shrink-0"
-        />
+          className="mt-1 shrink-0"
+        >
+          <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </motion.svg>
       </div>
     </motion.article>
   );

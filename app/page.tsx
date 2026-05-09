@@ -68,7 +68,7 @@ export default async function Home() {
         <section className="w-full bg-white" aria-label="Studio photography">
           <div className="relative h-[420px] w-full overflow-hidden sm:h-[560px] lg:h-[760px]">
             <img
-              src="https://www.figma.com/api/mcp/asset/92f87126-be84-4756-a7cc-1906686dd733"
+              src="/images/separator.jpg"
               alt="Photographer holding a camera"
               className="h-full w-full object-cover object-center"
             />
